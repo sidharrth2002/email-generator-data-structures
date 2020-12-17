@@ -4,7 +4,6 @@
 #include <sstream>
 #include <algorithm>
 #include <random>
-
 using namespace std;
 
 void generateRandomLetter();
@@ -43,7 +42,7 @@ int main() {
     Write.open("SetA.txt");
     for(int k = 0; k < 100; ++k) {
         cout << k << endl;
-        cout<<emails[k] << endl;
+        cout << emails[k] << endl;
         Write << emails[k] << endl;
     }
     Write.close();
@@ -109,14 +108,17 @@ void generateEmails(int num) {
         email += ".";
         email += extensions[rand() % 3];
 
+        emails.push_back(email);
+
+        //ignoring this part because it's a one in a million chance lmao
         //try again if combination already exists
-        if (find(emails.begin(), emails.end(), email) != emails.end()) {
-            k -= 1;
-            cout << "come here" << endl;
-        } else {
-            cout << email << endl;
-            emails.push_back(email);
-        }        
+        // if (find(emails.begin(), emails.end(), email) != emails.end()) {
+        //     k -= 1;
+        //     cout << "come here" << endl;
+        // } else {
+        //     cout << email << endl;
+        //     emails.push_back(email);
+        // }        
         //randomise at every step
         // shuffleList();
     }
