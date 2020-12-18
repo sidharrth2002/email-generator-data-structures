@@ -25,57 +25,46 @@ int main() {
     //initial shuffle
     shuffleList();
     srand(time(NULL));
-    
-    generateEmails(10);
 
-    Write.open("cannotbefound.txt");
-    for(int k = 0; k < 10; ++k) {
+    //Set A
+    cout << "Generating first set of 100 emails" << endl;
+    generateEmails(100);
+
+    //Set B
+    cout << "Generating second set of 100000 emails" << endl;
+    generateEmails(100000);
+
+    //Set C
+    cout << "Generating third set of 500000 emails" << endl;
+    generateEmails(500000);
+
+    Write.open("SetA.txt");
+    for(int k = 0; k < 100; ++k) {
         cout << k << endl;
         cout << emails[k] << endl;
         Write << emails[k] << endl;
     }
     Write.close();
 
-
-    // //Set A
-    // cout << "Generating first set of 100 emails" << endl;
-    // generateEmails(100);
+    emails.erase(emails.begin(), emails.begin() + 100);
 
     // //Set B
-    // cout << "Generating second set of 100000 emails" << endl;
-    // generateEmails(100000);
+    Write.open("SetB.txt");
+    for(int k=0; k<100000; ++k) {
+        cout<<emails[k] << endl;
+        Write << emails[k] << endl;
+    }
+    Write.close();
+
+    emails.erase(emails.begin(), emails.begin() + 100000);
 
     // //Set C
-    // cout << "Generating third set of 500000 emails" << endl;
-    // generateEmails(500000);
-
-    // Write.open("SetA.txt");
-    // for(int k = 0; k < 100; ++k) {
-    //     cout << k << endl;
-    //     cout << emails[k] << endl;
-    //     Write << emails[k] << endl;
-    // }
-    // Write.close();
-
-    // emails.erase(emails.begin(), emails.begin() + 100);
-
-    // // //Set B
-    // Write.open("SetB.txt");
-    // for(int k=0; k<100000; ++k) {
-    //     cout<<emails[k] << endl;
-    //     Write << emails[k] << endl;
-    // }
-    // Write.close();
-
-    // emails.erase(emails.begin(), emails.begin() + 100000);
-
-    // // //Set C
-    // Write.open("SetC.txt");
-    // for(int k=0; k<500000; ++k) {
-    //     cout<<emails[k] << endl;
-    //     Write << emails[k] << endl;
-    // }
-    // Write.close();
+    Write.open("SetC.txt");
+    for(int k=0; k<500000; ++k) {
+        cout<<emails[k] << endl;
+        Write << emails[k] << endl;
+    }
+    Write.close();
 }
 
 void loadValues() {
