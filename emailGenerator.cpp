@@ -67,6 +67,7 @@ int main() {
     Write.close();
 }
 
+//loading values
 void loadValues() {
     for (int i = 48; i <= 57; i++) {
         possibleCharsAll.push_back((char)i);
@@ -84,12 +85,14 @@ void loadValues() {
     extensions.push_back("org");
 }
 
+//shuffles list of possible characters
 void shuffleList() {
     default_random_engine e(chrono::system_clock::now().time_since_epoch().count());
     shuffle(possibleCharsAll.begin(), possibleCharsAll.end(), e);
     shuffle(possibleLetters.begin(), possibleLetters.end(), e);
 }
 
+//generates emails randomly
 void generateEmails(int num) {
     for (int k = 0; k < num; ++k) {
         string email;
@@ -108,17 +111,5 @@ void generateEmails(int num) {
         email += extensions[rand() % 3];
 
         emails.push_back(email);
-
-        //ignoring this part because it's a one in a million chance lmao
-        //try again if combination already exists
-        // if (find(emails.begin(), emails.end(), email) != emails.end()) {
-        //     k -= 1;
-        //     cout << "come here" << endl;
-        // } else {
-        //     cout << email << endl;
-        //     emails.push_back(email);
-        // }        
-        //randomise at every step
-        // shuffleList();
     }
 }
