@@ -11,9 +11,13 @@ void shuffleList();
 void loadValues();
 void generateEmails(int num);
 
+//stores all possible characters including letters and numbers
 vector<char> possibleCharsAll;
+//stores only letters
 vector<char> possibleLetters;
+//.com or .net or .org
 vector<string> extensions;
+//stores generated emails
 vector<string> emails;
 
 int main() {
