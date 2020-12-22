@@ -10,7 +10,7 @@ int main() {
     ifstream Read;
 
     // Set A
-    Read.open("../data/SetA.txt");
+    Read.open("../data/SetA/SetA.txt");
 
     auto start100 = high_resolution_clock::now();
 
@@ -34,7 +34,7 @@ int main() {
 
 
     // Set B
-    Read.open("../data/SetB.txt");
+    Read.open("../data/SetB/SetB.txt");
 
     auto start100000 = high_resolution_clock::now();
 
@@ -58,7 +58,7 @@ int main() {
 
 
     // Set C
-    Read.open("../data/SetC.txt");
+    Read.open("../data/SetC/SetC.txt");
 
     auto start500000 = high_resolution_clock::now();
 
