@@ -28,7 +28,7 @@ class BST {
         } else if (value > parent->data) {
             parent->right = insert(value, parent->right);
         } 
-        parent = balance(parent);
+        // parent = balance(parent);
         return parent;        
     }
 
@@ -161,7 +161,7 @@ class BST {
         printBT("", root, false);    
     }
 
-// pass the root node of your binary tree
+    // pass the root node of your binary tree
 
     // void display() {
     //     display(root, 1);
