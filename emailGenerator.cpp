@@ -44,7 +44,6 @@ int main() {
 
     Write.open("SetA.txt");
     for(int k = 0; k < 100; ++k) {
-        cout << k << endl;
         cout << emails[k] << endl;
         Write << emails[k] << endl;
     }
@@ -98,22 +97,26 @@ void shuffleList() {
 
 //generates emails randomly
 void generateEmails(int num) {
+  int shortOnes = 0;
     for (int k = 0; k < num; ++k) {
         string email;
         for(int i = 0; i < 5; ++i) {
-            email += possibleCharsAll[rand() % possibleCharsAll.size() - 1];
+            email += possibleCharsAll[rand() % (possibleCharsAll.size() - 1)];
         }
         email += ".";
         for(int i = 0; i < 5; ++i) {
-            email += possibleCharsAll[rand() % possibleCharsAll.size() - 1];
+            email += possibleCharsAll[rand() % (possibleCharsAll.size() - 1)];
         }
         email += "@";
         for (int j = 0; j < 5; ++j) {
-            email += possibleLetters[rand() % possibleLetters.size() - 1];
+            email += possibleLetters[rand() % (possibleLetters.size() - 1)];
         }
         email += ".";
         email += extensions[rand() % 3];
-
+        if (email.length() != 21) {
+          shortOnes += 1;
+        }
         emails.push_back(email);
     }
+    cout << shortOnes << endl;
 }
