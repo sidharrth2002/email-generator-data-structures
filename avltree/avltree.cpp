@@ -5,6 +5,7 @@ using namespace std;
 template <typename T>
 struct node {
     T data;
+    int height;
     node<T>* left;
     node<T>* right;
 };
@@ -22,13 +23,28 @@ class BST {
         if (parent == NULL) {
             parent = new node<T>;
             parent->data = value;
+            parent->height = 0;
             parent->left = parent->right = NULL;
-            return parent;
         } else if (value < parent->data) {
             parent->left = insert(value, parent->left);
+            if (nodeHeight(parent->left) - nodeHeight(parent->right) == 2) {
+                if (value < parent->left->data) {
+                    parent = rightRotate(parent);
+                } else {
+                    parent = leftRightRotate(parent);
+                }
+            }
         } else if (value > parent->data) {
             parent->right = insert(value, parent->right);
-        } 
+            if (nodeHeight(parent->right) - nodeHeight(parent->left) == 2) {
+                if (value > parent->right->data) {
+                    parent = leftRotate(parent);
+                } else {
+                    parent = rightLeftRotate(parent);
+                }
+            }
+        }
+        parent->height = max(nodeHeight(parent->left), nodeHeight(parent->right)) + 1; 
         // parent = balance(parent);
         return parent;        
     }
@@ -64,28 +80,42 @@ class BST {
 
     int nodeHeight(node<T>* parent) {
         if (parent == NULL) {
-            return 0;
+            return -1;
         } else {
-            int leftHeight = nodeHeight(parent->left);
-            int rightHeight = nodeHeight(parent->right);
-            if (leftHeight > rightHeight) {
-                return leftHeight + 1;
-            } else {
-                return rightHeight + 1;
-            }
+            return parent->height;
         }
+        // if (parent == NULL) {
+        //     return 0;
+        // } else {
+        //     int leftHeight = nodeHeight(parent->left);
+        //     int rightHeight = nodeHeight(parent->right);
+        //     if (leftHeight > rightHeight) {
+        //         return leftHeight + 1;
+        //     } else {
+        //         return rightHeight + 1;
+        //     }
+        // }
     }
 
     int balanceFactor(node<T>* parent) {
-        int leftHeight = nodeHeight(parent->left);
-        int rightHeight = nodeHeight(parent->right);
-        return rightHeight - leftHeight;
+        if (parent == NULL) {
+            return 0;
+        } else {
+            return nodeHeight(parent->left) - nodeHeight(parent->right);    
+        }
+
+        // int leftHeight = nodeHeight(parent->left);
+        // int rightHeight = nodeHeight(parent->right);
+        // return rightHeight - leftHeight;
     }
 
     node<T>* rightRotate(node<T>* parent) {
         node<T>* temp = parent->left;
         parent->left = temp->right;
         temp->right = parent;
+
+        parent->height = max(nodeHeight(parent->left), nodeHeight(parent->right)) + 1;
+        temp->height = max(nodeHeight(temp->left), parent->height)+1;
         return temp;
     }
 
@@ -93,6 +123,9 @@ class BST {
         node<T>* temp = parent->right;
         parent->right = temp->left;
         temp->left = parent;
+
+        parent->height = max(nodeHeight(parent->left), nodeHeight(parent->right)) + 1;
+        temp->height = max(nodeHeight(temp->right), parent->height)+1;
         return temp;
     }
 
@@ -154,6 +187,7 @@ class BST {
 
             // enter the next tree level - left and right branch
             printBT( prefix + (isLeft ? "│   " : "    "), parent->left, true);
+            // cout << parent->height << endl;
             printBT( prefix + (isLeft ? "│   " : "    "), parent->right, false);
         }
     }
@@ -268,3 +302,4 @@ class BST {
         //     }
         // }
     // }
+
