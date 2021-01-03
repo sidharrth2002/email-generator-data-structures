@@ -32,7 +32,7 @@ int main () {
 
     auto duration100 = duration_cast<microseconds>(stop100-start100);
 
-    cout << "Duration to insert 100 emails: " << duration100.count() << " microseconds." << endl;
+
     cout << endl;
     Read.close();
 
@@ -48,7 +48,6 @@ int main () {
 
   auto duration = duration_cast<microseconds>(stopde-startde);
 
-  cout << "Duration to remove 10 emails: " << duration.count() << " microseconds." << endl;
   cout << endl;
  
 
@@ -73,7 +72,7 @@ int main () {
 
     auto duration100000 = duration_cast<microseconds>(stop100000-start100000);
 
-    cout << "Duration to insert 100000 emails: " << duration100000.count() << " microseconds." << endl;
+
     cout << endl;
     Read.close();
 
@@ -89,7 +88,7 @@ int main () {
 
   auto duration2 = duration_cast<microseconds>(stopde2-startde2);
 
-  cout << "Duration to remove 10000 emails: " << duration2.count() << " microseconds." << endl;
+
   cout << endl;
 
 
@@ -113,9 +112,6 @@ int main () {
     auto stop500000 = high_resolution_clock::now();
 
     auto duration500000 = duration_cast<microseconds>(stop500000-start500000);
-
-    cout << "Duration to insert 500000 emails: " << duration500000.count() << " microseconds." << endl;
-
     cout << endl;
     Read.close();
 
@@ -128,12 +124,28 @@ int main () {
     cout << i + 1 << ": "<< setC.dequeue() << endl;
   }
   auto stopde3 = high_resolution_clock::now();
-
   auto duration3 = duration_cast<microseconds>(stopde3-startde3);
 
-  cout << "Duration to remove 50000 emails: " << duration3.count() << " microseconds." << endl;
   cout << endl;
 
+
+// print time:
+
+//enqueue set A:
+  cout << "Duration to insert 100 emails: " << duration100.count() << " microseconds." << endl;
+//dequeue set A:
+  cout << "Duration to remove 10 emails: " << duration.count() << " microseconds." << endl;
+
+//enqueue set B:
+  cout << "Duration to insert 100000 emails: " << duration100000.count() << " microseconds." << endl;
+//dequeue set B:
+  cout << "Duration to remove 10000 emails: " << duration2.count() << " microseconds." << endl;
+
+//enqueue set C:
+  cout << "Duration to insert 500000 emails: " << duration500000.count() << " microseconds." << endl;
+
+//dequeue set C:
+  cout << "Duration to remove 50000 emails: " << duration3.count() << " microseconds." << endl;
 
  
   
