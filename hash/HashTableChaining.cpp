@@ -2,15 +2,14 @@
 #include "LinkedList.cpp"
 
 template <typename T>
-class HashTable {
+class HashTableChaining {
   vector< LinkedList<T> > table;
 
-  long long hashfunction (string const& hashitem) {
+  long long hashfunction (T hashitem) {
     int p = 53;
     int m = 1e9 + 9;
     long long power_of_p = 1;
     long long hash_val = 0;
-
 
     for (int i = 0; i < hashitem.length(); i++) {
         hash_val
@@ -21,14 +20,14 @@ class HashTable {
             = (power_of_p * p) % m;
     }
     return hash_val % table.size();
-}
+  }
 
 
  public:
-  HashTable (int size) {
-table.resize (size);
+  HashTableChaining (int size) {  
+    table.resize (size);
   }
-  ~HashTable() {
+  ~HashTableChaining() {
     for (int i = 0; i < table.size(); i++)
       table[i].makeEmpty();
   }
@@ -36,23 +35,20 @@ table.resize (size);
     return table.size();
   }
   void insert (T newItem) {
-      long long  index = hashfunction (newItem);
-      table[index].insertFront (newItem);
+    long long  index = hashfunction (newItem);
+    table[index].insertFront (newItem);
   }
 
-    bool retrieve (T & target) {
-      int index = hashfunction (target);
-      if (!table[index].find (target))
-        return false;
-      return true;
+  bool retrieve (T & target) {
+    int index = hashfunction (target);
+    return table[index].find(target);
   }
 
-  friend ostream& operator<< (ostream& os, HashTable<T>& ht) {
+  friend ostream& operator<< (ostream& os, HashTableChaining<T>& ht) {
     for (int i = 0; i < ht.size(); i++)
       os << (i + 1) << " = " << ht.table[i] << endl;
     return os;
   }
-
 
 };
 

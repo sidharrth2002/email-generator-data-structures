@@ -44,6 +44,7 @@ class BST {
                 }
             }
         }
+        // parent = balance(parent);
         parent->height = max(nodeHeight(parent->left), nodeHeight(parent->right)) + 1; 
         // parent = balance(parent);
         return parent;        
@@ -55,14 +56,6 @@ class BST {
         inorder(t->left);
         cout << t->data << " ";
         inorder(t->right);
-    }
-
-    node<T>* getSuccessor(node<T>* parent) {
-        if (parent->right == NULL) {
-            return parent;
-        } else {
-            return getSuccessor(parent->right);
-        }
     }
 
     node<T>* findElement(node<T>* parent, T value) {
@@ -84,17 +77,6 @@ class BST {
         } else {
             return parent->height;
         }
-        // if (parent == NULL) {
-        //     return 0;
-        // } else {
-        //     int leftHeight = nodeHeight(parent->left);
-        //     int rightHeight = nodeHeight(parent->right);
-        //     if (leftHeight > rightHeight) {
-        //         return leftHeight + 1;
-        //     } else {
-        //         return rightHeight + 1;
-        //     }
-        // }
     }
 
     int balanceFactor(node<T>* parent) {
@@ -103,10 +85,6 @@ class BST {
         } else {
             return nodeHeight(parent->left) - nodeHeight(parent->right);    
         }
-
-        // int leftHeight = nodeHeight(parent->left);
-        // int rightHeight = nodeHeight(parent->right);
-        // return rightHeight - leftHeight;
     }
 
     node<T>* rightRotate(node<T>* parent) {
@@ -142,20 +120,33 @@ class BST {
     }
 
     node<T>* balance(node<T>* parent) {
-        int balancefactor = balanceFactor(parent);
-        if (balancefactor < -1) {
-            if(balanceFactor(parent->left) < 0) {
-                parent = rightRotate(parent);
-            } else {
-                parent = leftRightRotate(parent);
-            }
-        } else if (balancefactor > 1) {
-            if (balanceFactor(parent->right) < 0) {
-                parent = rightLeftRotate(parent);
-            } else {
-                parent = leftRotate(parent);
-            }
-        }
+        // if (nodeHeight(parent->right) - nodeHeight(parent->left) == 2) {
+        //     if (value > parent->right->data) {
+        //         parent = leftRotate(parent);
+        //     } else {
+        //         parent = rightLeftRotate(parent);
+        //     }
+        // } else if (nodeHeight(parent->right) - nodeHeight(parent->left) == 2) {
+        //     if (value > parent->right->data) {
+        //         parent = leftRotate(parent);
+        //     } else {
+        //         parent = rightLeftRotate(parent);
+        //     }
+        // }
+        // int balancefactor = balanceFactor(parent);
+        // if (balancefactor < -1) {
+        //     if(balanceFactor(parent->left) < 0) {
+        //         parent = rightRotate(parent);
+        //     } else {
+        //         parent = leftRightRotate(parent);
+        //     }
+        // } else if (balancefactor > 1) {
+        //     if (balanceFactor(parent->right) < 0) {
+        //         parent = rightLeftRotate(parent);
+        //     } else {
+        //         parent = leftRotate(parent);
+        //     }
+        // }
         return parent;
     }
 
@@ -196,8 +187,6 @@ class BST {
         printBT("", root, false);    
     }
 
-    // pass the root node of your binary tree
-
     // void display() {
     //     display(root, 1);
     // }
@@ -215,7 +204,13 @@ class BST {
     }
 };
 
-
+    // node<T>* getSuccessor(node<T>* parent) {
+    //     if (parent->right == NULL) {
+    //         return parent;
+    //     } else {
+    //         return getSuccessor(parent->right);
+    //     }
+    // }
 
 
     // void remove(int val) {
