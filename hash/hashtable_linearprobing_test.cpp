@@ -6,7 +6,7 @@
 using namespace std::chrono;
 
 int main() {
-  HashTableLinearProbing<string> h1(90);
+  HashTableLinearProbing<string> h1(150);
 
   auto start1 = high_resolution_clock::now();
 
@@ -24,7 +24,11 @@ int main() {
   }
 
   for (int i = 0; i < 100; i++) {
+    // cout << A[i] << endl;
     cout << A[i] << endl;
+    if (A[i] == "Xfl7Y.mmX5M@bshfX.net") {
+      cout << "in" << endl;
+    }
     h1.insert(A[i]);
   }
 
@@ -35,7 +39,6 @@ int main() {
   auto duration1 = duration_cast<microseconds>(stop1-start1);
   cout << "Duration to insert 100 emails: " << duration1.count() << " microseconds." << endl;
   cout << " " << endl;
-
   cout << h1.retrieve("Xfl7Y.mmX5M@bshfX.net") << endl;
 
   // string target1;

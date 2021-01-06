@@ -138,74 +138,110 @@ class HashTableLinearProbing {
     return tableSize;
   }
 
-  void insert (T newItem) {
-    int index = hashfunction(newItem);
-    // if (table[index] == "") {
-    //     table[index] = newItem;
-    // } else {
-        bool loaded = false;
-        while(!table[index].empty() && table[index] != newItem) { 
-            index++; 
-            // index %= capacity; 
-        } 
-        // while(!loaded) {
-        //     index += 1;
-        //     index %= capacity;
-        //     if(table[index].empty()) {
-        //         table[index] = newItem;
-        //         loaded = true;
-        //     } else if (table[index] == newItem) {
-        //       return;
-        //     } else if (index >= tableSize) {
-        //         index = -1;
-        //     }
-        // }
-    // }
-    if(!table[index].empty()) {
-      tableSize++;
-      cout << tableSize << endl;
-    }
-    table[index] = newItem;
-  }
-
-  bool retrieve (T target) {
-    int index = hashfunction(target);
-    int originalIndex = index;
-    if (table[index] == target) {
-        return true;
-    } else {
-        // bool found = false;
-
-        int numberSearched = 0;
-
-        while(table[index] != NULL) {  
-          numberSearched+=1;   
-          if(numberSearched>capacity)  //to avoid infinite loop 
-            return false;         
-            //if node found return its value 
-            if(table[index]->key == key) 
-                return arr[hashIndex]->value; 
+  void insert (T newItem) {          
+        int hashIndex = hashfunction(newItem); 
+          
+        while(table[hashIndex].length() != 0 && table[hashIndex] != newItem) 
+        { 
             hashIndex++; 
             hashIndex %= capacity; 
         } 
+          
+        if(table[hashIndex].length() == 0) 
+            tableSize++; 
+        table[hashIndex] = newItem; 
+    // int index = hashfunction(newItem);
+    // // if (table[index] == "") {
+    // //     table[index] = newItem;
+    // // } else {
+    //     bool loaded = false;
+    //     while(!table[index].empty() && table[index] != newItem) { 
+    //         index++; 
+    //     } 
+    // if(table[index].empty()) {
+    //   tableSize++;
+    // }
+    // table[index] = newItem;
+  }
 
-        while(!table[index].empty()) {
-            numberSearched += 1;
-            if(numberSearched > capacity) return false;
+  void printAt30() {
+    cout << table[30] << endl;
+  }
 
-            if(table[index] == target) return true;
+  bool retrieve (T target) {
+        // Apply hash function to find index for given key 
+        int hashIndex = hashfunction(target); 
+        int counter = 0; 
+        //finding the node with given key   
+        while(table[hashIndex].length() > 0) {   
+          int counter =0; 
+          cout << table[hashIndex] << endl;
+          if(counter++>capacity)  //to avoid infinite loop 
+            return false;         
+            //if node found return its value 
+          if(table[hashIndex] == target) 
+            return true; 
+          hashIndex++; 
+          hashIndex %= capacity; 
+        } 
+          
+        //If not found return null 
+        return false; 
 
-            index++;
-            index %= capacity;
-            // if(table[index] == target) {
-            //     return true;
-            // } else if (index >= tableSize) {
-            //     index = -1;
-            // } else if (index == originalIndex) {
-            //   return false;
-            // }
-        }
-    }
+    // int index = hashfunction(target);
+    // int originalIndex = index;
+    // if (table[index] == target) {
+    //     return true;
+    // } else {
+    //     bool found = false;
+    //     while(!found) {
+    //         index += 1;
+    //         if(table[index] == target) {
+    //             return true;
+    //         } else if (index >= tableSize) {
+    //             index = -1;
+    //         } else if (index == originalIndex) {
+    //           return false;
+    //         }
+    //     }
+    // }
+    // int index = hashfunction(target);
+    // int originalIndex = index;
+    // if (table[index] == target) {
+    //     return true;
+    // } else {
+    //     // bool found = false;
+
+    //     int numberSearched = 0;
+
+    //     while(table[index] != NULL) {  
+    //       numberSearched+=1;   
+    //       if(numberSearched>capacity)  //to avoid infinite loop 
+    //         return false;         
+    //         //if node found return its value 
+    //         if(table[index]->key == key) 
+    //             return arr[hashIndex]->value; 
+    //         hashIndex++; 
+    //         hashIndex %= capacity; 
+    //     } 
+
+    //     while(!table[index].empty()) {
+    //         numberSearched += 1;
+    //         if(numberSearched > capacity) return false;
+
+    //         if(table[index] == target) return true;
+
+    //         index++;
+    //         index %= capacity;
+    //         // if(table[index] == target) {
+    //         //     return true;
+    //         // } else if (index >= tableSize) {
+    //         //     index = -1;
+    //         // } else if (index == originalIndex) {
+    //         //   return false;
+    //         // }
+    //     }
+    // }
   }
 
   friend ostream& operator<< (ostream& os, HashTableLinearProbing<T>& ht) {

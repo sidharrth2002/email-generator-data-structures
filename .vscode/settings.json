@@ -6,6 +6,7 @@
         "__cxx_version": "cpp",
         "iostream": "cpp",
         "fstream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "chrono": "cpp"
     }
 }
