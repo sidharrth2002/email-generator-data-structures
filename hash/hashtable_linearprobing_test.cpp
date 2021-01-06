@@ -6,40 +6,46 @@
 using namespace std::chrono;
 
 int main() {
-  HashTableLinearProbing<string> h1(150);
+  HashTableLinearProbing<string> h1(750000);
 
   auto start1 = high_resolution_clock::now();
 
-  ifstream in;
-  in.open("../data/SetA/SetA.txt");
+  ifstream Read;
+  Read.open("../data/SetC/SetC.txt");
 
-  string A[100];
-  string element1;
+  // string A[500000];
+  // string element1;
 
-  if (in.is_open()) {
-  int i = 0;
-  while (in >> element1) {
-    A[i++] = element1;
-   }
+  while (!Read.eof()) {
+    string email;
+    Read >> email;
+    h1.insert(email);
   }
+  // if (in.is_open()) {
+  // int i = 0;
+  // while (in >> element1) {
+  //   cout << element1 << endl;
+  //   A[i++] = element1;
+  //  }
+  // }
 
-  for (int i = 0; i < 100; i++) {
-    // cout << A[i] << endl;
-    cout << A[i] << endl;
-    if (A[i] == "Xfl7Y.mmX5M@bshfX.net") {
-      cout << "in" << endl;
-    }
-    h1.insert(A[i]);
-  }
+  // for (int i = 0; i < 500000; i++) {
+  //   // cout << A[i] << endl;
+  //   cout << A[i] << endl;
+  //   if (A[i] == "Xfl7Y.mmX5M@bshfX.net") {
+  //     cout << "in" << endl;
+  //   }
+  //   h1.insert(A[i]);
+  // }
 
   // cout << h1 << endl;
-  in.close();
+  Read.close();
 
   auto stop1 = high_resolution_clock::now();
   auto duration1 = duration_cast<microseconds>(stop1-start1);
-  cout << "Duration to insert 100 emails: " << duration1.count() << " microseconds." << endl;
+  cout << "Duration to insert 700000 emails: " << duration1.count() << " microseconds." << endl;
   cout << " " << endl;
-  cout << h1.retrieve("Xfl7Y.mmX5M@bshfX.net") << endl;
+  // cout << h1.retrieve("Xfl7Y.mmX5M@bshfX.net") << endl;
 
   // string target1;
   // cout << "Target to retrieve: ";

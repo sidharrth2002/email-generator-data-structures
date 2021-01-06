@@ -44,6 +44,7 @@ class BST {
                 }
             }
         }
+        //manually store the height of the node
         parent->height = max(nodeHeight(parent->left), nodeHeight(parent->right)) + 1; 
         return parent;        
     }
@@ -115,21 +116,6 @@ class BST {
         node<T>* temp = parent->right;
         parent->right = rightRotate(temp);
         return leftRotate(parent);
-    }
-
-    void display(node<T>* parent, int lvl) {
-        if (parent == NULL) {
-            return;
-        } 
-        if (parent == root) {
-            cout << "Root: " << parent->data << endl;
-        } else {
-            cout << parent->data << endl;
-        }
-        cout << lvl << "L: ";
-        display(parent->left, lvl + 1);
-        cout << "\n" << lvl << "R: ";
-        display(parent->right, lvl + 1);
     }
 
     //from stack overflow- not mine
