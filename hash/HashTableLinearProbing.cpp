@@ -104,10 +104,6 @@ class HashTableLinearProbing {
     int capacity;
     int tableSize;
 
-  //int hashfunction (int hashitem) { // hash function
-  //  return hashitem % tableSize;
-  //}
-
   long long hashfunction(string const& hashitem) {
     int p = 53;
     int m = 1e9 + 9;
@@ -148,13 +144,14 @@ class HashTableLinearProbing {
     //     table[index] = newItem;
     // } else {
         bool loaded = false;
-        while(table[index] != "" && table[index] != newItem) { 
+        while(!table[index].empty() && table[index] != newItem) { 
             index++; 
-            index %= capacity; 
+            // index %= capacity; 
         } 
         // while(!loaded) {
         //     index += 1;
-        //     if(table[index] == NULL) {
+        //     index %= capacity;
+        //     if(table[index].empty()) {
         //         table[index] = newItem;
         //         loaded = true;
         //     } else if (table[index] == newItem) {
@@ -164,14 +161,14 @@ class HashTableLinearProbing {
         //     }
         // }
     // }
-    if(table[index]=="") {
+    if(!table[index].empty()) {
       tableSize++;
       cout << tableSize << endl;
     }
     table[index] = newItem;
   }
 
-  bool retrieve (T & target) {
+  bool retrieve (T target) {
     int index = hashfunction(target);
     int originalIndex = index;
     if (table[index] == target) {
@@ -181,18 +178,18 @@ class HashTableLinearProbing {
 
         int numberSearched = 0;
 
-        // while(table[index] != NULL) {  
-        //   numberSearched+=1;   
-        //   if(numberSearched>capacity)  //to avoid infinite loop 
-        //     return false;         
-        //     //if node found return its value 
-        //     if(table[index]->key == key) 
-        //         return arr[hashIndex]->value; 
-        //     hashIndex++; 
-        //     hashIndex %= capacity; 
-        // } 
+        while(table[index] != NULL) {  
+          numberSearched+=1;   
+          if(numberSearched>capacity)  //to avoid infinite loop 
+            return false;         
+            //if node found return its value 
+            if(table[index]->key == key) 
+                return arr[hashIndex]->value; 
+            hashIndex++; 
+            hashIndex %= capacity; 
+        } 
 
-        while(table[index] != "") {
+        while(!table[index].empty()) {
             numberSearched += 1;
             if(numberSearched > capacity) return false;
 

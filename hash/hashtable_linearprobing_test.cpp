@@ -6,8 +6,6 @@
 using namespace std::chrono;
 
 int main() {
-
-  //Set A
   HashTableLinearProbing<string> h1(90);
 
   auto start1 = high_resolution_clock::now();
@@ -37,6 +35,8 @@ int main() {
   auto duration1 = duration_cast<microseconds>(stop1-start1);
   cout << "Duration to insert 100 emails: " << duration1.count() << " microseconds." << endl;
   cout << " " << endl;
+
+  cout << h1.retrieve("Xfl7Y.mmX5M@bshfX.net") << endl;
 
   // string target1;
   // cout << "Target to retrieve: ";

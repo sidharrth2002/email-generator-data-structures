@@ -27,7 +27,7 @@ class BST {
             parent->left = parent->right = NULL;
         } else if (value < parent->data) {
             parent->left = insert(value, parent->left);
-            if (nodeHeight(parent->left) - nodeHeight(parent->right) == 2) {
+            if (balanceFactor(parent) == 2) {
                 if (value < parent->left->data) {
                     parent = rightRotate(parent);
                 } else {
@@ -36,7 +36,7 @@ class BST {
             }
         } else if (value > parent->data) {
             parent->right = insert(value, parent->right);
-            if (nodeHeight(parent->right) - nodeHeight(parent->left) == 2) {
+            if (balanceFactor(parent) == 2) {
                 if (value > parent->right->data) {
                     parent = leftRotate(parent);
                 } else {
@@ -44,9 +44,7 @@ class BST {
                 }
             }
         }
-        // parent = balance(parent);
         parent->height = max(nodeHeight(parent->left), nodeHeight(parent->right)) + 1; 
-        // parent = balance(parent);
         return parent;        
     }
 
@@ -83,7 +81,7 @@ class BST {
         if (parent == NULL) {
             return 0;
         } else {
-            return nodeHeight(parent->left) - nodeHeight(parent->right);    
+            return abs(nodeHeight(parent->left) - nodeHeight(parent->right));    
         }
     }
 
@@ -119,37 +117,6 @@ class BST {
         return leftRotate(parent);
     }
 
-    node<T>* balance(node<T>* parent) {
-        // if (nodeHeight(parent->right) - nodeHeight(parent->left) == 2) {
-        //     if (value > parent->right->data) {
-        //         parent = leftRotate(parent);
-        //     } else {
-        //         parent = rightLeftRotate(parent);
-        //     }
-        // } else if (nodeHeight(parent->right) - nodeHeight(parent->left) == 2) {
-        //     if (value > parent->right->data) {
-        //         parent = leftRotate(parent);
-        //     } else {
-        //         parent = rightLeftRotate(parent);
-        //     }
-        // }
-        // int balancefactor = balanceFactor(parent);
-        // if (balancefactor < -1) {
-        //     if(balanceFactor(parent->left) < 0) {
-        //         parent = rightRotate(parent);
-        //     } else {
-        //         parent = leftRightRotate(parent);
-        //     }
-        // } else if (balancefactor > 1) {
-        //     if (balanceFactor(parent->right) < 0) {
-        //         parent = rightLeftRotate(parent);
-        //     } else {
-        //         parent = leftRotate(parent);
-        //     }
-        // }
-        return parent;
-    }
-
     void display(node<T>* parent, int lvl) {
         if (parent == NULL) {
             return;
@@ -163,7 +130,6 @@ class BST {
         display(parent->left, lvl + 1);
         cout << "\n" << lvl << "R: ";
         display(parent->right, lvl + 1);
-
     }
 
     //from stack overflow- not mine
@@ -187,10 +153,6 @@ class BST {
         printBT("", root, false);    
     }
 
-    // void display() {
-    //     display(root, 1);
-    // }
-
     void insert(T x) {
         root = insert(x, root);
     }
@@ -203,98 +165,3 @@ class BST {
         }
     }
 };
-
-    // node<T>* getSuccessor(node<T>* parent) {
-    //     if (parent->right == NULL) {
-    //         return parent;
-    //     } else {
-    //         return getSuccessor(parent->right);
-    //     }
-    // }
-
-
-    // void remove(int val) {
-    //     remove(val, root);
-    // }
-
-    //this function is totally fucked
-    // node<T>* remove(int value, node<T>* parent) {
-    //     node<T>* temp;
-
-        // if (parent == NULL) {
-        //     return parent;
-        // } 
-        // else if (value < parent->data) {
-        //     parent->left = remove(value, parent->left);
-        // } else {
-        //     if (value > parent->data) {
-        //         parent->right = remove(value, parent->right);
-        //     } else {
-        //         //no children
-        //         if(parent->left == NULL && parent->right == NULL) {
-        //             delete parent;
-        //             parent = NULL;
-        //         //two children
-        //         }  
-                
-        //         else if (parent->left != NULL && parent->right != NULL) {
-        //             temp = FindMin(parent->right);
-        //             parent->data = temp->data;
-        //             parent->right = remove(parent->data, parent->right);
-        //         //one child
-        //         } else if (parent->left != NULL || parent->right != NULL) {
-        //             temp = parent;
-        //             if (parent->left == NULL) {
-        //                 parent = parent->right;
-        //             } else if (parent->right == NULL) {
-        //                 parent = parent->left;
-        //             }
-        //             delete temp;
-        //         } 
-        //     }
-        // }
-        // return parent;
-
-
-
-        // if(parent == NULL) {
-        //     return parent;
-        // } else if (value < parent->data) {
-        //     parent->left = remove(value, parent->left);
-        // } else if (value > parent->data) {
-        //     parent->right = remove(value, parent->right);
-        // } else if(parent->left != NULL && parent->right != NULL) {
-        //     temp = getSuccessor(parent->right);
-        //     parent->data = temp->data;
-        //     parent->right = remove(parent->data, parent->right);
-        // } else {
-        //     temp = parent;
-        //     if (parent->left == NULL) {
-        //         parent = parent->right;
-        //     } else if (parent->right == NULL) {
-        //         parent = parent->left;
-        //     }
-        //     delete temp;
-        // }
-        // return parent;
-
-        // else {
-        //     //no child node
-        //     if (parent->left == NULL && parent->right == NULL) {
-        //         parent = NULL;
-        //     //one child node
-        //     } else if (parent->left == NULL || parent->right == NULL) {
-        //         if (parent->right != NULL) {
-        //             temp = parent->right;
-        //         } else {
-        //             temp = parent->left;
-        //         }
-        //     //two child nodes
-        //     } else {
-        //         temp = getSuccessor(parent->left);
-        //         parent->data = temp->data;
-        //         parent->left = remove(temp->data, parent->left);
-        //     }
-        // }
-    // }
-
