@@ -39,7 +39,7 @@ class HashTableChaining {
     table[index].insertFront (newItem);
   }
 
-  bool retrieve (T & target) {
+  bool retrieve (T target) {
     int index = hashfunction (target);
     return table[index].find(target);
   }

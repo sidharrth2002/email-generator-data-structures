@@ -30,24 +30,26 @@ int main() {
   cout << "Duration to insert 100 emails: " << duration1.count() << " microseconds." << endl;
   cout << " " << endl;
 
-  // string target1;
-  // cout << "Target to retrieve: ";
-  // cin >> target1;
+  cout << h1.retrieve("6EbPI.E8QhS@APDBy.net") << endl;
 
-  // auto start2 = high_resolution_clock::now();
+  string target1;
+  cout << "Target to retrieve: ";
+  cin >> target1;
 
-  // if (h1.retrieve (target1))
-  //   cout << "Target found\n";
-  // else
-  //   cout << "Target not found\n";
+  auto start2 = high_resolution_clock::now();
 
-  // auto stop2 = high_resolution_clock::now();
-  // auto duration2 = duration_cast<microseconds>(stop2-start2);
-  // cout << "Duration to search the data: " << duration2.count() << " microseconds." << endl;
-  // cout << " " << endl;
+  if (h1.retrieve (target1))
+    cout << "Target found\n";
+  else
+    cout << "Target not found\n";
+
+  auto stop2 = high_resolution_clock::now();
+  auto duration2 = duration_cast<microseconds>(stop2-start2);
+  cout << "Duration to search the data: " << duration2.count() << " microseconds." << endl;
+  cout << " " << endl;
 
 
-   //Set B
+//    Set B
   HashTableChaining<string> h2(90000);
 
   auto start3 = high_resolution_clock::now();
@@ -61,7 +63,7 @@ int main() {
       h2.insert(email);
   }
 
-  cout << h2 << endl;
+//   cout << h2 << endl;
   in.close();
 
   auto stop3 = high_resolution_clock::now();
@@ -69,24 +71,24 @@ int main() {
   cout << "Duration to insert 100000 emails: " << duration3.count() << " microseconds." << endl;
   cout << " " << endl;
 
-  // string target2;
-  // cout << "Target to retrieve: ";
-  // cin >> target2;
+  string target2;
+  cout << "Target to retrieve: ";
+  cin >> target2;
 
-  // auto start4 = high_resolution_clock::now();
+  auto start4 = high_resolution_clock::now();
 
-  // if (h2.retrieve (target2))
-  //   cout << "Target found\n";
-  // else
-  //   cout << "Target not found\n";
+  if (h2.retrieve (target2))
+    cout << "Target found\n";
+  else
+    cout << "Target not found\n";
 
-  // auto stop4 = high_resolution_clock::now();
-  // auto duration4 = duration_cast<microseconds>(stop4-start4);
-  // cout << "Duration to search the data: " << duration4.count() << " microseconds." << endl;
-  // cout << " " << endl;
+  auto stop4 = high_resolution_clock::now();
+  auto duration4 = duration_cast<microseconds>(stop4-start4);
+  cout << "Duration to search the data: " << duration4.count() << " microseconds." << endl;
+  cout << " " << endl;
 
 
-  //Set C
+//   Set C
   HashTableChaining<string> h3(450000);
 
   auto start5 = high_resolution_clock::now();
@@ -99,7 +101,7 @@ int main() {
       h3.insert(email);
   }
 
-  cout << h3 << endl;
+//   cout << h3 << endl;
   in.close();
 
   auto stop5 = high_resolution_clock::now();
@@ -107,21 +109,21 @@ int main() {
   cout << "Duration to insert 500000 emails: " << duration5.count() << " microseconds." << endl;
   cout << " " << endl;
 
-  // string target3;
-  // cout << "Target to retrieve: ";
-  // cin >> target3;
+  string target3;
+  cout << "Target to retrieve: ";
+  cin >> target3;
 
-  // auto start6 = high_resolution_clock::now();
+  auto start6 = high_resolution_clock::now();
 
-  // if (h3.retrieve (target3))
-  //   cout << "Target found\n";
-  // else
-  //   cout << "Target not found\n";
+  if (h3.retrieve (target3))
+    cout << "Target found\n";
+  else
+    cout << "Target not found\n";
 
-  // auto stop6 = high_resolution_clock::now();
-  // auto duration6 = duration_cast<microseconds>(stop6-start6);
-  // cout << "Duration to search the data: " << duration6.count() << " microseconds." << endl;
-  // cout << " " << endl;
+  auto stop6 = high_resolution_clock::now();
+  auto duration6 = duration_cast<microseconds>(stop6-start6);
+  cout << "Duration to search the data: " << duration6.count() << " microseconds." << endl;
+  cout << " " << endl;
 
   }
 
