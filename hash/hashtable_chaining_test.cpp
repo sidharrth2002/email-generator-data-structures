@@ -10,15 +10,14 @@ int main() {
   HashTableChaining<string> h1(90);
 
   auto start1 = high_resolution_clock::now();
-
   ifstream in;
-
   in.open("../data/SetA/SetA.txt");
 
+
   while (!in.eof()) {
-      string email;
-      in >> email;
-      h1.insert(email);
+      string email1;
+      in >> email1;
+      h1.insert(email1);
   }
 
   cout << h1 << endl;
@@ -27,106 +26,158 @@ int main() {
 
   auto stop1 = high_resolution_clock::now();
   auto duration1 = duration_cast<microseconds>(stop1-start1);
-  cout << "Duration to insert 100 emails: " << duration1.count() << " microseconds." << endl;
+  //cout << "Duration to insert 100 emails: " << duration1.count() << " microseconds." << endl;
   cout << " " << endl;
 
-  cout << h1.retrieve("6EbPI.E8QhS@APDBy.net") << endl;
+ in.open("../data/SetA/canbefound.txt"); 
+    double avgTimeForSuccessFulSearch1 = 0;
+    while (!in.eof()) {
+        string email1;
+        in >> email1;
+        auto start100 = high_resolution_clock::now();
+        
+        h1.retrieve(email1);
+        
+        auto end100 = high_resolution_clock::now();
+        avgTimeForSuccessFulSearch1 += duration_cast<nanoseconds>(end100-start100).count();
+        
+    }
+    avgTimeForSuccessFulSearch1 /= 10;
+    //cout << "Average duration to search Tree A with emails that can be found " << avgTimeForSuccessFulSearch1 << endl;
+    in.close();
 
-  string target1;
-  cout << "Target to retrieve: ";
-  cin >> target1;
+    in.open("../data/SetA/cannotbefound.txt");
+    double avgTimeForSuccessFulSearch100 = 0;
+    while (!in.eof()) {
+        string email100;
+        in >> email100;
+        auto start200 = high_resolution_clock::now();
+        h1.retrieve(email100);
+        auto end200 = high_resolution_clock::now();
+        avgTimeForSuccessFulSearch100 += duration_cast<nanoseconds>(end200-start200).count();
+        
+    }
+    avgTimeForSuccessFulSearch100 /= 10;
+    //cout << "Average duration to search Tree A with emails that cannot be found " << avgTimeForSuccessFulSearch100 << endl;
+    in.close(); 
 
-  auto start2 = high_resolution_clock::now();
 
-  if (h1.retrieve (target1))
-    cout << "Target found\n";
-  else
-    cout << "Target not found\n";
-
-  auto stop2 = high_resolution_clock::now();
-  auto duration2 = duration_cast<microseconds>(stop2-start2);
-  cout << "Duration to search the data: " << duration2.count() << " microseconds." << endl;
-  cout << " " << endl;
-
-
-//    Set B
+   //Set B
   HashTableChaining<string> h2(90000);
 
-  auto start3 = high_resolution_clock::now();
+  auto start2 = high_resolution_clock::now();
 
 
   in.open("../data/SetB/SetB.txt");
 
   while (!in.eof()) {
-      string email;
-      in >> email;
-      h2.insert(email);
+      string email2;
+      in >> email2;
+      h2.insert(email2);
   }
 
-//   cout << h2 << endl;
+  //cout << h2 << endl;
   in.close();
 
-  auto stop3 = high_resolution_clock::now();
-  auto duration3 = duration_cast<microseconds>(stop3-start3);
-  cout << "Duration to insert 100000 emails: " << duration3.count() << " microseconds." << endl;
+  auto stop2 = high_resolution_clock::now();
+  auto duration2 = duration_cast<microseconds>(stop2-start2);
+  //cout << "Duration to insert 100000 emails: " << duration2.count() << " microseconds." << endl;
   cout << " " << endl;
 
-  string target2;
-  cout << "Target to retrieve: ";
-  cin >> target2;
+   in.open("../data/SetB/canbefound.txt"); 
+    double avgTimeForSuccessFulSearch2 = 0;
+    while (!in.eof()) {
+        string email2;
+        in >> email2;
+        auto start300 = high_resolution_clock::now();
+        
+        h2.retrieve(email2);
+        
+        auto end300 = high_resolution_clock::now();
+        avgTimeForSuccessFulSearch2 += duration_cast<nanoseconds>(end300-start300).count();
+        
+    }
+    avgTimeForSuccessFulSearch2 /= 10;
+    //cout << "Average duration to search Tree B with emails that can be found " << avgTimeForSuccessFulSearch2 << endl;
+    in.close();
 
-  auto start4 = high_resolution_clock::now();
+    in.open("../data/SetB/cannotbefound.txt");
+    double avgTimeForSuccessFulSearch200 = 0;
+    while (!in.eof()) {
+        string email200;
+        in >> email200;
+        auto start400 = high_resolution_clock::now();
+        h2.retrieve(email200);
+        auto end400 = high_resolution_clock::now();
+        avgTimeForSuccessFulSearch200 += duration_cast<nanoseconds>(end400-start400).count();
+        
+    }
+    avgTimeForSuccessFulSearch200 /= 10;
+    //cout << "Average duration to search Tree B with emails that cannot be found " << avgTimeForSuccessFulSearch200 << endl;
+    in.close(); 
 
-  if (h2.retrieve (target2))
-    cout << "Target found\n";
-  else
-    cout << "Target not found\n";
-
-  auto stop4 = high_resolution_clock::now();
-  auto duration4 = duration_cast<microseconds>(stop4-start4);
-  cout << "Duration to search the data: " << duration4.count() << " microseconds." << endl;
-  cout << " " << endl;
-
-
-//   Set C
+  
+  //Set C
   HashTableChaining<string> h3(450000);
 
-  auto start5 = high_resolution_clock::now();
+  auto start3 = high_resolution_clock::now();
 
   in.open("../data/SetC/SetC.txt");
 
   while (!in.eof()) {
-      string email;
-      in >> email;
-      h3.insert(email);
+      string email3;
+      in >> email3;
+      h3.insert(email3);
   }
 
-//   cout << h3 << endl;
+  //cout << h3 << endl;
   in.close();
 
-  auto stop5 = high_resolution_clock::now();
-  auto duration5 = duration_cast<microseconds>(stop5-start5);
-  cout << "Duration to insert 500000 emails: " << duration5.count() << " microseconds." << endl;
+  auto stop3 = high_resolution_clock::now();
+  auto duration3 = duration_cast<microseconds>(stop3-start3);
+  //cout << "Duration to insert 500000 emails: " << duration3.count() << " microseconds." << endl;
   cout << " " << endl;
+  
+  in.open("../data/SetC/canbefound.txt"); 
+    double avgTimeForSuccessFulSearch3 = 0;
+    while (!in.eof()) {
+        string email3;
+        in >> email3;
+        auto start500 = high_resolution_clock::now();
+        
+        h3.retrieve(email3);
+        
+        auto end500 = high_resolution_clock::now();
+        avgTimeForSuccessFulSearch3 += duration_cast<nanoseconds>(end500-start500).count();
+    }
+    avgTimeForSuccessFulSearch3 /= 10;
+    //cout << "Average duration to search Tree C with emails that can be found " << avgTimeForSuccessFulSearch3 << endl;
+    in.close();
 
-  string target3;
-  cout << "Target to retrieve: ";
-  cin >> target3;
+        in.open("../data/SetC/cannotbefound.txt");
+    double avgTimeForSuccessFulSearch300 = 0;
+    while (!in.eof()) {
+        string email300;
+        in >> email300;
+        auto start600 = high_resolution_clock::now();
+        h3.retrieve(email300);
+        auto end600 = high_resolution_clock::now();
+        avgTimeForSuccessFulSearch300 += duration_cast<nanoseconds>(end600-start600).count();
+        
+    }
+    avgTimeForSuccessFulSearch300 /= 10;
+    //cout << "Average duration to search Tree C with emails that cannot be found " << avgTimeForSuccessFulSearch300 << endl;
+    in.close();
+    
 
-  auto start6 = high_resolution_clock::now();
+    cout << "Duration to insert 100 emails: " << duration1.count() << " microseconds." << endl;
+    cout << "Average duration to search Tree A with emails that can be found " << avgTimeForSuccessFulSearch1 << " nanoseconds" << endl;
+    cout << "Average duration to search Tree A with emails that cannot be found " << avgTimeForSuccessFulSearch100 << " nanoseconds" << endl;
+    cout << "Duration to insert 100000 emails: " << duration2.count() << " microseconds." << endl;
+    cout << "Average duration to search Tree B with emails that can be found " << avgTimeForSuccessFulSearch2 <<  " nanoseconds" << endl;
+    cout << "Average duration to search Tree B with emails that cannot be found " << avgTimeForSuccessFulSearch200 << " nanoseconds" << endl;
+    cout << "Duration to insert 500000 emails: " << duration3.count() << " microseconds." << endl;
+    cout << "Average duration to search Tree C with emails that can be found " << avgTimeForSuccessFulSearch3 << " nanoseconds" << endl;
+    cout << "Average duration to search Tree C with emails that cannot be found " << avgTimeForSuccessFulSearch300 << " nanoseconds" << endl;
 
-  if (h3.retrieve (target3))
-    cout << "Target found\n";
-  else
-    cout << "Target not found\n";
-
-  auto stop6 = high_resolution_clock::now();
-  auto duration6 = duration_cast<microseconds>(stop6-start6);
-  cout << "Duration to search the data: " << duration6.count() << " microseconds." << endl;
-  cout << " " << endl;
-
-  }
-
-
-
-
+}
