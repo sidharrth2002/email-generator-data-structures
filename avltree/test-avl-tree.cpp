@@ -18,6 +18,7 @@ int main() {
     }
     auto stop100 = high_resolution_clock::now();
     auto duration100 = duration_cast<microseconds>(stop100-start100);
+    treeA.display();
     cout << "Duration to insert 100 emails: " << duration100.count() << " microseconds." << endl;
     Read.close();
 
