@@ -44,7 +44,6 @@ int main() {
 
     Write.open("SetA.txt");
     for(int k = 0; k < 100; ++k) {
-        cout << emails[k] << endl;
         Write << emails[k] << endl;
     }
     Write.close();
@@ -54,7 +53,6 @@ int main() {
     // //Set B
     Write.open("SetB.txt");
     for(int k=0; k<100000; ++k) {
-        cout<<emails[k] << endl;
         Write << emails[k] << endl;
     }
     Write.close();
@@ -64,7 +62,6 @@ int main() {
     // //Set C
     Write.open("SetC.txt");
     for(int k=0; k<500000; ++k) {
-        cout<<emails[k] << endl;
         Write << emails[k] << endl;
     }
     Write.close();
@@ -97,7 +94,6 @@ void shuffleList() {
 
 //generates emails randomly
 void generateEmails(int num) {
-  int shortOnes = 0;
     for (int k = 0; k < num; ++k) {
         string email;
         for(int i = 0; i < 5; ++i) {
@@ -113,10 +109,6 @@ void generateEmails(int num) {
         }
         email += ".";
         email += extensions[rand() % 3];
-        if (email.length() != 21) {
-          shortOnes += 1;
-        }
         emails.push_back(email);
     }
-    cout << shortOnes << endl;
 }
