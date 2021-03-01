@@ -1,5 +1,9 @@
-Sidharrth Nagappan- 1181102313
-Ahmed Elsayed- 1181102208
-Piragash Maran- 1181101448
+The purpose is to gain a high level understanding of the various data structures, optimise them, measure their execution speeds and come to an overall understanding of their time complexities.
+A total of 3 key data structures were built, measured and analysed:
 
-Each folder has a test file and the class file. The core directory has the email generator file. Please do not run unless you want to regenerate the data (it will rewrite the existing datasets).
+1) Hash Tables With Chaining and Linear Probing
+2) AVL Tree that self balances upon every insertion
+3) Maxheap that arranges inserted data in a hierarchical structure for enqueuing and
+dequeuing
+
+Some algorithms were built recursively while some were built with loops, depending on the use case, to optimise execution time. Key parts of various algorithms will be discussed in the following pages.
